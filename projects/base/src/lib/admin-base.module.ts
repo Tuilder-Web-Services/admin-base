@@ -38,4 +38,4 @@ import { MatButtonModule } from '@angular/material/button'
     EditEntityComponent
   ]
 })
-export class AdminStarterModule { }
+export class TuilderAdminBaseModule { }
