@@ -5,7 +5,8 @@
     "@angular/common": "^15.2.4",
     "@angular/core": "^15.2.4",
     "@angular/material": "~15.2.4",
-    "@blueshiftone/ngx-grid-core": "^0.18.5"
+    "@blueshiftone/ngx-grid-core": "^0.18.5",
+    "@tuilder/ws-client": "^0.4.3"
   },
   "dependencies": {
     "tslib": "^2.3.0"

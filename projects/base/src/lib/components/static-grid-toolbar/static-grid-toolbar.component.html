@@ -1,0 +1,13 @@
+<button mat-flat-button color="primary" (click)="insertRow()">
+  <mat-icon svgIcon="InsertAtTop"></mat-icon>
+  <span class="label">Insert</span>
+</button>
+
+<button mat-flat-button *ngIf="(hasDirtyRecords | async)" color="accent" (click)="commitAll()">
+  <mat-icon>check</mat-icon>
+  <span class="label">Commit</span>
+</button>
+<button mat-button *ngIf="(hasDirtyRecords | async)" color="warn" (click)="revertAll()">
+  <mat-icon>undo</mat-icon>
+  <span class="label">Revert</span>
+</button>

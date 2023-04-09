@@ -1,0 +1,7 @@
+<div class="toolbar">
+  <lib-static-grid-toolbar (update)="write($event)" (delete)="delete($event)"></lib-static-grid-toolbar>
+</div>
+<div class="grid">
+  <data-grid #grid [data]="dataSource"></data-grid>
+  <lib-floating-grid-toolbar [grid]="grid"></lib-floating-grid-toolbar>
+</div>

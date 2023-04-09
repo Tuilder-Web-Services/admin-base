@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  height: 100%;
+  position: relative;
+}
+
+.toolbar {
+  height: 60px;
+  display: flex;
+}
+
+.grid {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.entity-name {
+  font-size: 30px;
+  border: none;
+  width: 200px;
+  background-color: transparent;
+  padding-left: 20px;
+}
