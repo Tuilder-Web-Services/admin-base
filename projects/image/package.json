@@ -1,11 +1,10 @@
 {
-  "name": "@tuilder/admin-base",
-  "version": "1.1.0",
+  "name": "@tuilder/image",
+  "version": "0.0.2",
   "peerDependencies": {
     "@angular/common": "^15.2.4",
     "@angular/core": "^15.2.4",
     "@angular/material": "~15.2.4",
-    "@blueshiftone/ngx-grid-core": "^0.18.5",
     "@tuilder/ws-client": "^0.5.0"
   },
   "dependencies": {
