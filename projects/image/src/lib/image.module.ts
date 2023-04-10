@@ -3,18 +3,23 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { CommonModule } from '@angular/common'
 
 @NgModule({
   declarations: [
     UploadImageComponent
   ],
   imports: [
+    CommonModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     UploadImageComponent
   ]
 })
-export class ImageModule { }
+export class TuilderImageModule { }

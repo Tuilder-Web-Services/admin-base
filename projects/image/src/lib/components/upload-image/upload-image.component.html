@@ -1,1 +1,2 @@
-<p>upload-image works!</p>
+<input type="file" (change)="onFileChange($event)" accept="image/*" />
+<img *ngIf="imagePreview" [src]="imagePreview" alt="Image preview" />
