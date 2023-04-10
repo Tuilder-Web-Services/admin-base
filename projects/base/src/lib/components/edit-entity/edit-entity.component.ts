@@ -100,10 +100,10 @@ export class EditEntityComponent extends AutoUnsubscribe implements OnInit {
       ])
     }))
 
-    firstValueFrom(this.backend.send<IEntity>('Read', { table: 'entity', id: this.id, options: { firstOnly: true } }).response).then(entity => {
+    firstValueFrom(this.backend.send<IEntity>('Read', { table: 'entity', options: { firstOnly: true, id: this.id, } }).response).then(entity => {
       this.entity = entity
       this.name = entity?.name ?? ''
-      this.backend.send<IEntityField[]>('Read', { table: 'entityField', query: { entityId: this.id } }).response.subscribe(rows => {
+      this.backend.send<IEntityField[]>('Read', { table: 'entityField', options: { where: {entityId: this.id} } }).response.subscribe(rows => {
         if (!rows) return
         const gridRows = rows.map(d => {
           const values: Map<TColumnKey, IGridCellValue> = new Map(Object.entries(d).map(([k, v]) => {

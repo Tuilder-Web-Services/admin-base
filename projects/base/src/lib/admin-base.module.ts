@@ -10,7 +10,10 @@ import { EditEntitiesComponent } from './components/edit-entities/edit-entities.
 import { MatListModule } from '@angular/material/list'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { EditEntityComponent } from './components/edit-entity/edit-entity.component'
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
+import { AdminBasicSettingsComponent } from './components/basic-settings/basic-settings.component'
+import { MatSelectModule } from '@angular/material/select'
+import { MatFormFieldModule } from '@angular/material/form-field'
 
 @NgModule({
   declarations: [
@@ -18,7 +21,8 @@ import { MatButtonModule } from '@angular/material/button'
     FloatingGridToolbarComponent,
     StaticGridToolbarComponent,
     EditEntitiesComponent,
-    EditEntityComponent
+    EditEntityComponent,
+    AdminBasicSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -28,14 +32,17 @@ import { MatButtonModule } from '@angular/material/button'
     MatListModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatFormFieldModule
   ],
   exports: [
     EntityGridComponent,
     FloatingGridToolbarComponent,
     StaticGridToolbarComponent,
     EditEntitiesComponent,
-    EditEntityComponent
+    EditEntityComponent,
+    AdminBasicSettingsComponent
   ]
 })
 export class TuilderAdminBaseModule { }

@@ -1,0 +1,11 @@
+<!-- Angular outlined mat form field with a dropdown select with options -->
+
+<div class="new-accounts">
+  <mat-form-field appearance="outline">
+    <mat-label>New Accounts</mat-label>
+    <mat-select [(ngModel)]="newAccounts" (selectionChange)="onNewAccountsChanged($event)">
+      <mat-option value="multi-tenant">Multi-Tenant</mat-option>
+      <mat-option value="same-tenant">Single-Tenant (added to my account)</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
