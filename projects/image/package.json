@@ -1,6 +1,6 @@
 {
   "name": "@tuilder/image",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^15.2.4",
     "@angular/core": "^15.2.4",
