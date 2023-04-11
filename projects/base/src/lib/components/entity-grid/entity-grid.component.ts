@@ -1,5 +1,5 @@
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core'
-import { DataGridComponent, GridColumn, GridDataSource, IGridRow, GridImplementationFactory, TColumnKey, IGridCellValue, GridCellValue, GridCellCoordinates, GridMetadataCollection, EMetadataType, TCellTypeName } from '@blueshiftone/ngx-grid-core'
+import { Component, OnChanges, Input, OnInit, ViewChild } from '@angular/core'
+import { DataGridComponent, GridColumn, GridDataSource, IGridRow, GridImplementationFactory, TColumnKey, IGridCellValue, GridCellValue, GridCellCoordinates, EMetadataType, TCellTypeName } from '@blueshiftone/ngx-grid-core'
 import { WsClient } from '@tuilder/ws-client'
 import { firstValueFrom } from 'rxjs'
 import { GridWrapperService } from '../../services/grid-wrapper.service'
@@ -12,19 +12,17 @@ import { IEntity } from '../edit-entity/edit-entity.component'
   styleUrls: ['./entity-grid.component.scss'],
   providers: [GridWrapperService],
 })
-export class EntityGridComponent implements OnInit {
+export class EntityGridComponent implements OnChanges {
 
-  @ViewChild('grid', { read: DataGridComponent, static: true }) public gridComponent!: DataGridComponent
+  @ViewChild('grid', { read: DataGridComponent }) public gridComponent!: DataGridComponent
 
   @Input() name = ''
 
   private entity?: IEntity | null = null
 
-  dataSource = new GridDataSource({
-    dataGridID: `entity-grid-${this.name}`,
-    dataSetName: this.name,
-    primaryColumnKey: 'id',
-  })
+  dataSource = new GridDataSource()
+
+  componentKeys = [0]
 
   constructor(
     private backend: WsClient,
@@ -32,8 +30,19 @@ export class EntityGridComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-    this.gridWrapperService.setGrid(this.gridComponent)
+  ngOnChanges(): void {
+    this.dataSource = new GridDataSource({
+      dataGridID: `entity-grid-${this.name}`,
+      dataSetName: this.name,
+      primaryColumnKey: 'id',
+    })
+    this.componentKeys = [Date.now()]
+    this.gridWrapperService.waitingForGrid = new Promise(resolve => {
+      setTimeout(() => {
+        this.gridWrapperService.setGrid(this.gridComponent)
+        resolve()
+      })
+    })
     firstValueFrom(this.backend.send<IEntityModel<any>>('EntityRead', { slug: this.name }).response).then(data => {
       if (!data) return
       this.entity = data.entity
@@ -58,7 +67,6 @@ export class EntityGridComponent implements OnInit {
         const row = GridImplementationFactory.gridRow('id', values)
         return row
       })
-      console.log(rows)      
       this.dataSource.setRows(rows)
     })
   }

@@ -2,7 +2,8 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion'
 import { Component, ElementRef, HostBinding, Input, OnDestroy, OnInit, Optional, Self } from '@angular/core'
 import { ControlValueAccessor, FormControl, FormGroupDirective, NgControl, NgForm } from '@angular/forms'
 import { MatFormFieldControl } from '@angular/material/form-field'
-import { Subject, filter, takeUntil } from 'rxjs'
+import { Subject, distinctUntilChanged, takeUntil } from 'rxjs'
+
 
 @Component({
   selector: 'lib-upload-image',
@@ -28,27 +29,27 @@ export class UploadImageComponent implements ControlValueAccessor, OnInit, OnDes
   }
   set value(value: any) {
     if (this.control.value !== value) {
-      this.control.setValue(value, {emitEvent: false});
-      this.stateChanges.next();
+      this.control.setValue(value)
+      this.stateChanges.next()
     }
   }
 
   @Input()
   get required() {
-    return this._required;
+    return this._required
   }
   set required(req) {
-    this._required = coerceBooleanProperty(req);
-    this.stateChanges.next();
+    this._required = coerceBooleanProperty(req)
+    this.stateChanges.next()
   }
   private _required = false;
 
   @Input()
-  get disabled(): boolean { return this._disabled; }
+  get disabled(): boolean { return this._disabled }
   set disabled(value: boolean) {
-    this._disabled = coerceBooleanProperty(value);
-    this._disabled ? this.control.disable() : this.control.enable();
-    this.stateChanges.next();
+    this._disabled = coerceBooleanProperty(value)
+    this._disabled ? this.control.disable() : this.control.enable()
+    this.stateChanges.next()
   }
   private _disabled = false;
 
@@ -82,21 +83,21 @@ export class UploadImageComponent implements ControlValueAccessor, OnInit, OnDes
 
   onFocusIn() {
     if (!this.focused) {
-      this.focused = true;
-      this.stateChanges.next();
+      this.focused = true
+      this.stateChanges.next()
     }
   }
 
   onFocusOut(event: FocusEvent) {
     if (!this._elementRef.nativeElement.contains(event.relatedTarget as Element)) {
-      this.focused = false;
-      this.onTouched();
-      this.stateChanges.next();
+      this.focused = false
+      this.onTouched()
+      this.stateChanges.next()
     }
   }
 
   get errorState(): boolean {
-    return this.control.invalid && this.control.touched;
+    return this.control.invalid && this.control.touched
   }
 
   constructor(
@@ -109,7 +110,7 @@ export class UploadImageComponent implements ControlValueAccessor, OnInit, OnDes
     if (this.ngControl != null) {
       // Setting the value accessor directly (instead of using
       // the providers) to avoid running into a circular import.
-      this.ngControl.valueAccessor = this;
+      this.ngControl.valueAccessor = this
     }
   }
 
@@ -126,17 +127,20 @@ export class UploadImageComponent implements ControlValueAccessor, OnInit, OnDes
       this.value = this._valuePreregistered
       this._valuePreregistered = null
     }
-    const form = this.ngForm ? this.ngForm : this.formGroupDirective;
-    form.ngSubmit.pipe(takeUntil(this.destroy$)).subscribe(() => {
+    this.form.ngSubmit.pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.control.markAsTouched()
       this.stateChanges.next()
     })
   }
 
+  get form () {
+    return this.ngForm ? this.ngForm : this.formGroupDirective
+  }
+
   ngOnDestroy() {
     this.stateChanges.complete()
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
   onFileChange(event: Event) {
@@ -145,9 +149,7 @@ export class UploadImageComponent implements ControlValueAccessor, OnInit, OnDes
     const reader = new FileReader()
     reader.onload = () => {
       this.imagePreview = reader.result
-      this.value = reader.result
-      this.control.markAsTouched()
-      this.control.markAsDirty()
+      this.value = file
       this.stateChanges.next()
     }
     reader.readAsDataURL(file)
@@ -165,19 +167,20 @@ export class UploadImageComponent implements ControlValueAccessor, OnInit, OnDes
 
   writeValue(value: any) {
     if (this.control) {
-      this.value = value
+      if (value !== this.control.value) {
+        this.value = value
+      }
     } else {
       this._valuePreregistered = value
     }
   }
-
   private _valuePreregistered: any
 
   registerOnChange(fn: any) {
     if (!this.control) {
       this._onChangePreregistered = fn
     } else {
-      this.control.valueChanges.subscribe(fn)
+      this.control.valueChanges.pipe(distinctUntilChanged()).subscribe(fn)
     }
   }
   private _onChangePreregistered: any

@@ -8,7 +8,13 @@
       ],
       "image": [
         "dist/image"
-      ]
+      ],      
+      "@blueshiftone/ngx-grid-core": [
+        "../../@blueshiftone/ngx-grid/dist/ngx-grid-core"
+      ],
+      "@angular/*": [ "./node_modules/@angular/*" ],
+      "rxjs": [ "./node_modules/rxjs" ],
+      "rxjs/*": [ "./node_modules/rxjs/*" ],
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

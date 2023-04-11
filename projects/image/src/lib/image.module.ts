@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon'
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CommonModule } from '@angular/common'
     MatIconModule,
     MatProgressBarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     UploadImageComponent
