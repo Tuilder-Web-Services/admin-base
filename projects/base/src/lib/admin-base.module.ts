@@ -13,7 +13,8 @@ import { EditEntityComponent } from './components/edit-entity/edit-entity.compon
 import { MatButtonModule } from '@angular/material/button';
 import { AdminBasicSettingsComponent } from './components/basic-settings/basic-settings.component'
 import { MatSelectModule } from '@angular/material/select'
-import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { UsersComponent } from './components/users/users.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MatFormFieldModule } from '@angular/material/form-field'
     StaticGridToolbarComponent,
     EditEntitiesComponent,
     EditEntityComponent,
-    AdminBasicSettingsComponent
+    AdminBasicSettingsComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { MatFormFieldModule } from '@angular/material/form-field'
     StaticGridToolbarComponent,
     EditEntitiesComponent,
     EditEntityComponent,
-    AdminBasicSettingsComponent
+    AdminBasicSettingsComponent,
+    UsersComponent
   ]
 })
 export class TuilderAdminBaseModule { }

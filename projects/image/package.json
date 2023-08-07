@@ -1,11 +1,11 @@
 {
   "name": "@tuilder/image",
-  "version": "1.1.0",
+  "version": "1.1.4",
   "peerDependencies": {
     "@angular/common": "^15.2.4",
     "@angular/core": "^15.2.4",
     "@angular/material": "~15.2.4",
-    "@tuilder/ws-client": "^0.5.0",
+    "@tuilder/ws-client": "^1.1.0",
     "nanoid": "^4.0.2"
   },
   "dependencies": {

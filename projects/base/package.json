@@ -1,12 +1,12 @@
 {
   "name": "@tuilder/admin-base",
-  "version": "1.2.0",
+  "version": "1.2.4",
   "peerDependencies": {
     "@angular/common": "^15.2.4",
     "@angular/core": "^15.2.4",
     "@angular/material": "~15.2.4",
     "@blueshiftone/ngx-grid-core": "^0.18.5",
-    "@tuilder/ws-client": "^0.5.0"
+    "@tuilder/ws-client": "^1.1.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
